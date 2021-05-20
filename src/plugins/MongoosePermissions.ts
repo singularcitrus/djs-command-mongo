@@ -12,21 +12,24 @@ import {
   PermissionResolvable,
 } from "discord.js";
 import Permissions from "../models/Permissions";
+import { MongoosePermissionsOptions } from "../types";
 
 let mongooseGlobal;
 let customPerms: string[] = [];
+let rootAccountId: string;
 
 /**
  * @param mongoose
- * @param {string[]} permissions List of valid custom permissions for your commands
- * @param mongoOptions
+ * @param options
  */
 export default function (
   mongoose: string | typeof Mongoose,
-  permissions: string[] | undefined = [],
-  mongoOptions: MongoClientOptions | undefined
+  options: MongoosePermissionsOptions
 ) {
-  if (permissions) customPerms = permissions;
+  const { permissions, rootAccount, mongoOptions } = options;
+  rootAccountId = rootAccount;
+
+  if (permissions) customPerms.push(...permissions);
   const plugin = new Plugin("mongoose-permissions");
 
   if (typeof mongoose === "string") {
@@ -83,7 +86,7 @@ function checkPermissions(
   if (!member) return false;
 
   // First of all, check for Root account, this will always be true
-  if (member.user.id === process.env.ROOT_ACCOUNT_ID) {
+  if (member.user.id === rootAccountId) {
     return true;
   }
 
