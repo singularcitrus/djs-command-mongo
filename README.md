@@ -1,4 +1,3 @@
 # djs-command-mongo
 
-Docs to come
-
+Go read the [full documentation](https://djs.singularcitrus.me/djs-command-mongo/welcome)
