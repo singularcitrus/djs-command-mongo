@@ -6,4 +6,4 @@ const permissions = new mongoose.Schema({
   permissions: [String],
 });
 
-export default mongoose.model("permissions", permissions);
+export default mongoose.model("djs-cc-permissions", permissions);
