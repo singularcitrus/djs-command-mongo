@@ -37,6 +37,8 @@ export default function (
   }
 
   plugin.initialize = initialize;
+
+  return plugin;
 }
 
 function initialize(
