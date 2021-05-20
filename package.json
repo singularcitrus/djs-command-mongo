@@ -33,7 +33,10 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "djs-command-control": "^1.5.0"
+    "@types/mongodb": "^3.6.14",
+    "discord.js": "^12.5.3",
+    "djs-command-control": "^1.5.0",
+    "mongoose": "^5.12.10"
   },
   "files": [
     "lib",
