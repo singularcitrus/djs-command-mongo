@@ -4,18 +4,15 @@ import {
   DjsCommandControlClient,
   Plugin,
 } from "djs-command-control";
-import { MongoClientOptions } from "mongodb";
-import {
-  GuildMember,
-  Message,
-  PermissionOverwriteOptions,
-  PermissionResolvable,
-} from "discord.js";
+import { GuildMember, Message, PermissionResolvable } from "discord.js";
 import Permissions from "../models/Permissions";
 import { MongoosePermissionsOptions } from "../types";
+import AddPermission from "../commands/AddPermission";
+import RemovePermission from "../commands/RemovePermission";
+import Commands from "djs-command-control/lib/classes/Commands";
 
 let mongooseGlobal;
-let customPerms: string[] = [];
+let customPerms: string[] = ["PERM_ADMIN"];
 let rootAccountId: string;
 
 /**
@@ -41,17 +38,26 @@ export default function (
 
   plugin.initialize = initialize;
 
+  plugin.addBundledCommand(AddPermission(customPerms));
+  plugin.addBundledCommand(RemovePermission(customPerms));
+
   return plugin;
 }
 
 function initialize(
-  djsCommandControl: DjsCommandControlClient | null
+  djsCommandControl: DjsCommandControlClient | null,
+  ctx: Commands
 ): DjsCommandControlClient | false {
   if (!djsCommandControl) return false;
 
   const djs = djsCommandControl;
 
   djs.FilterCommands.byPermission = byPermission;
+
+  ctx.categories.push({
+    name: "permissions",
+    title: "Permission Management",
+  });
 
   return djs;
 }

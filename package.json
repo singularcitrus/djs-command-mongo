@@ -35,7 +35,7 @@
   "dependencies": {
     "@types/mongodb": "^3.6.14",
     "discord.js": "^12.5.3",
-    "djs-command-control": "^1.5.0",
+    "djs-command-control": "^1.5.2",
     "mongoose": "^5.12.10"
   },
   "files": [
