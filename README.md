@@ -1,2 +1,5 @@
-# djs-command-control-mongodb
-MongoDB Plugins for djs-command-control
+# djs-command-mongo
+
+A Plugin Library for expanding djs-command-control
+
+Read the full docs at [djs.singularcitrus.me](https://djs.singularcitrus.me/v/1.5.0/);
